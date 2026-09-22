@@ -1,0 +1,22 @@
+name: Production Health Check
+on: [ push, pull_request ]
+jobs:
+  health-runner:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Get Repository
+         uses: actions/checkout@v4
+       - name: Set Node 20
+         uses: actions/setup-node@v4
+         with:
+           node_version: '20'
+       - name: Clean Install
+         run: npm ci
+
+       - name: Execute Health Script
+         run: npm run health
+         env:
+           ENVIRONMENT: 'production'
+           AUTH_TOKEN: ${{ secrets.AUTH_SECRET }}
+         
+  
