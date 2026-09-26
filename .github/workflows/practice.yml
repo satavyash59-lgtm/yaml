@@ -6,8 +6,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: echo "Testing"
-   deploy:
+  deploy:
      needs: test
      runs-on: ubuntu-latest
      steps:
-       -run: echo "Deploying, only if test passed"
+       - run: echo "Deploying, only if test passed"
