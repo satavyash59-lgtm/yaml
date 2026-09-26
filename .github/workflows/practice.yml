@@ -1,24 +1,9 @@
-name: Production Health Check
-
-on: [push, pull_request]
-
+name: CI
+on: push
 jobs:
-  health-runner:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Repository
-        uses: actions/checkout@v4
-
-      - name: Set Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Clean Install
-        run: echo "Simulating npm ci"
-
-      - name: Execute Health Script
-        run: echo "Environment is $ENVIRONMENT"
-        env:
-          ENVIRONMENT: 'production'
-          AUTH_TOKEN: ${{ secrets.AUTH_SECRET }}
+      - uses: actions/checkout@v4
+      - run: echo"Build started for $GITHUB_SHA"
+      - run: ls -la
