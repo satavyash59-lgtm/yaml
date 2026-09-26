@@ -10,4 +10,7 @@ jobs:
      needs: test
      runs-on: ubuntu-latest
      steps:
-       - run: echo "Deploying, only if test passed"
+       - name: Deploy
+         env:
+           TOKEN: ${{secrets.production}}
+       - run: echo "Deploying"
