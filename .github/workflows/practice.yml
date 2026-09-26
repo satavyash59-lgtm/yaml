@@ -10,7 +10,7 @@ jobs:
      needs: test
      runs-on: ubuntu-latest
      steps:
-       - name: Deploy
-         env:
-           TOKEN: ${{secrets.production}}
-       - run: echo "Deploying"
+      - name: Deploy
+        env:
+          TOKEN: ${{secrets.DEPLOY_TOKEN}}
+        run: echo "Deploying"
