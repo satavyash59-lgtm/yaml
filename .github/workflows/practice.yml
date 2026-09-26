@@ -1,17 +1,19 @@
 name: CI
-on: push
+on: [ push, pull_request ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        node: ["18", "20"]
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node }}
+          cache: "npm"
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: dist/
+      - run: npm ci
+      - run: npm test
